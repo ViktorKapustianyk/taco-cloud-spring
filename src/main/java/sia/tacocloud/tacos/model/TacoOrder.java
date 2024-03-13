@@ -3,7 +3,7 @@ package sia.tacocloud.tacos.model;
 import jakarta.validation.constraints.Digits;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Pattern;
-import lombok.Data;
+import lombok.*;
 import org.hibernate.validator.constraints.CreditCardNumber;
 
 import java.util.ArrayList;
