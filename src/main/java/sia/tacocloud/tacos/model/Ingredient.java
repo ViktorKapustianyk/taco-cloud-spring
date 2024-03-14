@@ -1,10 +1,15 @@
 package sia.tacocloud.tacos.model;
 
-import lombok.Data;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import lombok.*;
 
 @Data
+@Entity
 public class Ingredient {
-    private final String id;
-    private final String name;
-    private final Type type;
+
+    @Id
+    private String id;
+    private String name;
+    private Type type;
 }

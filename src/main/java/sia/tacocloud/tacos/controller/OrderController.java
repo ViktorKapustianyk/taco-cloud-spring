@@ -10,25 +10,40 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
 import sia.tacocloud.tacos.model.TacoOrder;
+import sia.tacocloud.tacos.repository.OrderRepository;
 
 @Slf4j
 @Controller
 @RequestMapping("/orders")
 @SessionAttributes("tacoOrder")
 public class OrderController {
+    private OrderRepository orderRepo;
+    public OrderController(OrderRepository orderRepo) {
+        this.orderRepo = orderRepo;
+    }
     @GetMapping("/current")
     public String orderForm(){
         return "orderForm";
     }
+//    @PostMapping
+//    public String processOrder(@Valid TacoOrder order, Errors errors,
+//                               SessionStatus sessionStatus) {
+//
+//        if (errors.hasErrors()) {
+//            return "orderForm";
+//        }
+//
+//        log.info("Order submitted: {}", order);
+//        sessionStatus.setComplete();
+//        return "redirect:/";
+//    }
     @PostMapping
     public String processOrder(@Valid TacoOrder order, Errors errors,
                                SessionStatus sessionStatus) {
-
         if (errors.hasErrors()) {
             return "orderForm";
         }
-
-        log.info("Order submitted: {}", order);
+        orderRepo.save(order);
         sessionStatus.setComplete();
         return "redirect:/";
     }
